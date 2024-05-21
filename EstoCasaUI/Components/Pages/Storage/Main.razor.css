@@ -1,0 +1,24 @@
+﻿html, body {
+    width: 100%;
+    height: 100%;
+}
+.card {
+    width: 100%;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    border-radius: 5px;
+    padding: 10px;
+    justify-content: space-around;
+    margin: 10px 0 0;
+}
+.itemName {
+    min-width: 80%;
+    font-size: 1.2rem;
+}
+.itemQuantity {
+    font-size: 1.2rem;
+}
+.itemUnity {
+    font-size: 0.8rem;
+}

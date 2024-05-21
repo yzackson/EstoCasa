@@ -1,0 +1,40 @@
+﻿@page "/Main"
+@using System.Text.Json
+<h3>Main</h3>
+
+@foreach (var item in items)
+{
+    <div class="card">
+        <div class="itemName">@item.name</div>
+        <div class="itemQuantity">@item.quantity</div>
+        <div class="itemUnity">@item.unity</div>
+    </div>
+}
+
+
+
+@code {
+    private StorageItem[] items;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        using (var client = new HttpClient())
+        {
+            var result = client.GetAsync(new Uri("https://y75yupwy3m5kuow563rxna7xgy0zdlfv.lambda-url.sa-east-1.on.aws/storage")).Result;
+            var message = result.Content.ReadAsStringAsync().Result;
+            var res = JsonSerializer.Deserialize<StorageItem[]>(message);
+            items = res;
+        }
+    }
+    
+    private class StorageItem
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string type { get; set; }
+        public string mark { get; set; }
+        public string unity { get; set; }
+        public float quantity { get; set; }
+        public DateTime expire_date { get; set; }
+    }
+}
